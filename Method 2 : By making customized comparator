@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+void sortA1ByA2(vector &arr1 , vector &arr2){
+         
+    unordered_map index;
+ 
+    for(int i=0; i<arr2.size(); i++){
+          if (index[arr2[i]] == 0) {
+            index[arr2[i]] = i+1;
+        }
+    }
+         
+    auto comp = [&](int a , int b){
+        if(index[a] == 0  && index[b]==0) return a<b;
+ 
+        if(index[a] == 0)  return false;
+ 
+        if(index[b] == 0)   return true;
+ 
+          return index[a] < index[b];
+         
+        };
+ 
+    sort(arr1.begin(), arr1.end() , comp);
+         
+}
+ 
+int main(){
+ 
+    vector arr1{ 20, 1, 20, 5, 7, 1, 9, 39, 6, 18, 18 };
+    vector arr2{ 20, 1, 18, 39};
+  
+    sortA1ByA2(arr1 , arr2);
+ 
+ 
+    for(auto i: arr1){
+            cout<<i<<" ";
+    }
+ 
+    return 0;
+ 
+}
